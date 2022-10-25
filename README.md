@@ -2,9 +2,9 @@
 
 ## Game Rules
 - Each card has a numerical value.
-  ○ Numbered cards are counted at their face value (two counts as 2 points, three, 3 points, and so on)
-  ○ An Ace count as either 1 point or 11 points (whichever suits the player best)
-  ○ Jack, queen and king count 10 points each
+  * Numbered cards are counted at their face value (two counts as 2 points, three, 3 points, and so on)
+  * An Ace count as either 1 point or 11 points (whichever suits the player best)
+  * Jack, queen and king count 10 points each
 - The player will compete against the computer which represents the casino.
 - The goal of the player is to try to reach a total point sum of 21 without exceeding it. Whoever exceeds 21 first loses (technically known as busting).
 - At the beginning of each round, the player is dealt two open cards and the computer is dealt one open card. The cards are open, meaning that the values are known for both, the player and the computer (no hidden cards).

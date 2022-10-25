@@ -435,6 +435,6 @@ int main()
         if (tolower(answer) != 'y')
             break;
     }
-    printf("Game over!");
+    printf("Game over! Thank you for visiting the Blackjack table.");
     return 0;
 }

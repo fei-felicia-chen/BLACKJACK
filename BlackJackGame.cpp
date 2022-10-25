@@ -159,11 +159,8 @@ int Hand::getTotal()
     }
 
     // Take into account number of aces and get total when bursted
-    if (total > 21)
-    {
-        while (total > 21 && numAce-- > 0)
+    while (total > 21 && numAce-- > 0)
             total -= 10;
-    }
     return total;
 }
 
@@ -199,7 +196,7 @@ Deck::~Deck()
 
 void Deck::populate()
 {
-    deck.clear();                                           // empty current deck
+    deck.clear();                                           // reset deck if applicable
     for (unsigned suit = CLUBS; suit <= SPADES; suit++) {   // iterate through all suits
         for (unsigned num = ACE; num <= KING; num++) {      // iterate through all ranks
             Card c = Card(Rank(num), Type(suit));
@@ -243,12 +240,12 @@ AbstractPlayer::AbstractPlayer()
 
 AbstractPlayer::~AbstractPlayer()
 {
-    delete this->hand;
+    delete hand;
 }
 
 bool AbstractPlayer::isBusted()
 {
-    return (this->hand->getTotal() > 21);
+    return (hand->getTotal() > 21);
 }
 
 class CasinoPlayer: public AbstractPlayer
@@ -300,10 +297,7 @@ bool HumanPlayer::isDrawing()
     printf("Do you want to draw? (y/n): ");
     char answer = '!';          // initialize to random character
     cin >> answer;
-    if (tolower(answer) == 'y')
-        return true;
-    else
-        return false;
+    return (tolower(answer) == 'y' ? true : false);
 }
 
 void HumanPlayer::announce(CasinoPlayer *casino)
@@ -350,13 +344,14 @@ BlackJackGame::BlackJackGame()
 
 BlackJackGame::~BlackJackGame()
 {
-    delete this->m_deck;
-    delete this->m_casino;
-    delete this->m_user;
+    delete m_deck;
+    delete m_casino;
+    delete m_user;
 }
 
 void BlackJackGame::reset()
 {
+    // clear user's hands
     Hand *casino_hand = m_casino->getHand();
     Hand *user_hand = m_user->getHand();
     casino_hand->clear();
@@ -401,7 +396,6 @@ void BlackJackGame::play()
             user_busted = true;
             break;
         }
-        
     }
 
     // Deal cards to casino player as long as it's less than user's
@@ -430,7 +424,7 @@ int main()
     {
         game.play();
         printf("Would you like to play another round? (y/n): ");
-        char answer = '!';          // initialize to random character
+        char answer = '!';                      // initialize to random character
         cin >> answer;
         if (tolower(answer) != 'y')
             break;
